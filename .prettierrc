@@ -1,0 +1,5 @@
+{
+  "tailwindPreserveWhitespace": true,
+  "tailwindFunctions": ["tw"],
+  "tailwindConfig": "./styles/tailwind.config.js"
+}

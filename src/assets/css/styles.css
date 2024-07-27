@@ -1,0 +1,10 @@
+@import "dimensions.css";
+@import "_reset.css";
+@import "base.css";
+@import "tailwind.css";
+
+@layer base {
+  .schedule-row-on-table {
+    @apply min-h-[60px] border-b border-solid border-[#eee];
+  }
+}
