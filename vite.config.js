@@ -2,18 +2,20 @@ import { defineConfig,loadEnv } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import path from "path";
 
-const pathSrc = path.resolve(__dirname, "./src");
+
+const pathSrc = path.resolve(__dirname, 'src'); // Ensure pathSrc is correctly pointing to 'src' directory
 
 export default defineConfig(({mode})=>{
   
     const env = loadEnv(mode, process.cwd(), "");
   
   return {
-plugins: [vue()],
+plugins: [vue(),ElementPlus({useSource:true})],
     css: {
       postcss: './postcss.config.cjs',
       preprocessorOptions: {
         scss: {
+          silenceDeprecations: ["legacy-js-api"],
           additionalData: `
             @use "@/assets/styles/dimensions" as *;
           `,
@@ -25,16 +27,15 @@ plugins: [vue()],
     },
     resolve: {
       alias: {
-        "@assets": `${pathSrc}/assets/*`,
-        "@components": `${pathSrc}/components/*`,
-        "@api/*": `${pathSrc}/api/*`,
-        "@component/*": `${pathSrc}/component/*`,
-        "@composable/*": `${pathSrc}/composable/*`,
-        "@config/*": `${pathSrc}/config/*`,
-        "@view/*": `${pathSrc}/view/*`,
-        "@store/*": `${pathSrc}/store/*`,
-        "@type/*": `${pathSrc}/type/*`,
-        "@util/*": `${pathSrc}/util/*`,
+        "@assets": path.join(__dirname, `src/assets`),
+        "@components":path.join(__dirname, `src/components`) ,
+        "@api/*": path.join(__dirname,`src/api`),
+        "@composable": path.join(__dirname, `src/composable`),
+        "@config/*": path.join(__dirname,`src/config`),
+        "@view/*": path.join(__dirname,`src/view`),
+        "@store/*": path.join(__dirname,`src/store`),
+        "@type/*": `src/type/*`,
+        "@util/*": `src/util/*`,
         "@theme": path.join(__dirname, `src/assets/themes/${env.VITE_THEME}`),
         "@": `${pathSrc}/`,
       },
@@ -54,3 +55,4 @@ plugins: [vue()],
     },
   }
 })
+
